@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include <time.h>
+#include "array.h"
 
 #define WINDOW_TITLE "01 Open Window"
 #define SCREEN_WIDTH 1280
@@ -15,6 +17,22 @@ void visualizer_cleanup(t_visualizer * visualizer, int exit_status);
 bool sdl_initialize(t_visualizer *visualzier);
 
 int main() {
+    srand(time(NULL));  
+
+    dns_arr_t *arr = create_dns_array(10);
+
+    printf("This is the new array with size: %d and index 2: %d\n", arr->size, arr->arr[2]);
+
+    int set = dns_arr_set(arr, 5, 2);
+    printf("Index 2 after new set: %d and in func %d\n", arr->arr[2], set);
+
+    printf("Index 10 before del: %d and size %d\n", arr->arr[10], arr->size);
+    int del = dns_arr_del_at_index(arr, 9);
+    printf("Index 9 after del: %d and size %d\n", arr->arr[9], arr->size);
+
+    int add = dns_arr_append(arr, 20);
+    printf("Index 10 after appending 20: %d and size %d\n", arr->arr[10], arr->size);
+
     t_visualizer DNSVisualizer = {
         .window = NULL,
         .renderer = NULL,
