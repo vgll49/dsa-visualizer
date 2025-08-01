@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include "array.h"
 
 dns_arr_t *create_dns_array(int size) {
-
+    srand(time(NULL));  
     dns_arr_t *arr = malloc(sizeof(dns_arr_t));
 
     if (arr == NULL) {
@@ -13,10 +14,10 @@ dns_arr_t *create_dns_array(int size) {
     }
 
     arr->size = size;
-    arr->arr = calloc(1, size * (sizeof(int)));
+    arr->data = calloc(1, size * (sizeof(int)));
 
     for(int i = 0; i < size; i++) {
-        arr->arr[i] = rand() % 100;
+        arr->data[i] = rand() % 100;
     }
 
     return arr;
@@ -29,22 +30,23 @@ int dns_arr_set(dns_arr_t *arr, int element,  int index) {
         return 1;
     }
 
-    arr->arr[index] = element;
+    arr->data[index] = element;
 
-    return arr->arr[index];
+    return arr->data[index];
 }
 
-int dns_arr_append(dns_arr_t *arr, int element) {
+int dns_arr_append(dns_arr_t *arr) {
+    srand(time(NULL));  
     int new_size = arr->size+1;
 
-    int *tmp = realloc(arr->arr, new_size * sizeof(int));
+    int *tmp = realloc(arr->data, new_size * sizeof(int));
     if(!tmp) {
-        free(arr->arr);
+        free(arr->data);
         return 1;
     }
 
-    tmp[new_size-1] = element;
-    arr->arr = tmp;
+    tmp[new_size-1] = rand() % 100;
+    arr->data = tmp;
     arr->size++;
 
     return arr->size;
@@ -57,18 +59,18 @@ int dns_arr_del_at_index(dns_arr_t *arr, int index) {
     }
 
     for (int i = index; i < arr->size -1; i++) {
-        arr->arr[i] = arr->arr[i+1];
+        arr->data[i] = arr->data[i+1];
     }
 
     int new_size = arr->size-1;
-    int *tmp = realloc(arr->arr, new_size * sizeof(int));
+    int *tmp = realloc(arr->data, new_size * sizeof(int));
     
     if(!tmp) {
-        free(arr->arr);
+        free(arr->data);
         return 1;
     }
 
-    arr->arr = tmp;
+    arr->data = tmp;
     arr->size--;
 
     return arr->size;

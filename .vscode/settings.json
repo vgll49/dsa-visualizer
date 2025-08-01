@@ -2,6 +2,14 @@
     "files.associations": {
         "stdbool.h": "c",
         "sdl.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "array.h": "c",
+        "render_helpers.h": "c",
+        "time.h": "c",
+        "sdl_ttf.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c"
     }
 }
