@@ -6,16 +6,30 @@
 #include <time.h>
 #include "array.h"
 #include "stack.h"
+#include "queue.h"
 #include "../render/render_helpers.h"
 
 int main() {
-    dns_stack_t *stack = stack_create(10);
-    stack_push_multiple_types(stack);
-    stack_print(stack);
-    printf("STACK SIZE %d\n", stack->count);
-    
-
-
+    dns_int_queue_t *queue = queue_create(8);
+    queue_push(queue);
+    SDL_Delay(1000);    
+    queue_push(queue);
+    SDL_Delay(1000);
+    queue_push(queue);
+    SDL_Delay(1000);
+    queue_push(queue);
+    queue_print(queue);
+    int pop_q = queue_pop(queue);
+    printf("queue pop: %d\n", pop_q);
+    SDL_Delay(1000);
+    queue_push(queue);
+    SDL_Delay(1000);
+    queue_print(queue);
+    queue_push(queue);
+    queue_print(queue);
+    int peek = queue_peek(queue);
+    printf("queue peek result: %d\n", peek);
+    free(queue);
 
 
     t_visualizer DNSVisualizer = {

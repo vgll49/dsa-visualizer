@@ -86,9 +86,10 @@ void draw_homescreen(VisualizerContext ctx) {
 
     // TODO: Add loop through arr of strings, add them with spcaing of y * 2
     SDL_Rect body_pos = draw_text(ctx.visualizer, header_pos.x, header_pos.y * 2, body_font, "> press 1 for Array Operations", color_body);
+    draw_text(ctx.visualizer, header_pos.x, header_pos.y + 150, body_font, "> press 2 for Stack Operations", color_body);
+    draw_text(ctx.visualizer, header_pos.x, header_pos.y + 200, body_font, "> press 3 for Queue Operations", color_body);
 
     SDL_RenderPresent(ctx.visualizer.renderer);
-
 }
  
 
@@ -160,6 +161,39 @@ void handle_array_input(VisualizerContext *ctx, SDL_Event *event) {
         }
     }
 }
+
+void handle_stack_input(VisualizerContext *ctx, SDL_Event *event) {
+    if (event->type == SDL_KEYDOWN) {
+        switch (event->key.keysym.scancode)
+        {
+        case SDL_SCANCODE_A:
+            dns_arr_append(ctx->arr);
+            break;
+        case SDL_SCANCODE_D: 
+            dns_arr_del_at_index(ctx->arr, 0);
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void handle_queue_input(VisualizerContext *ctx, SDL_Event *event) {
+    if (event->type == SDL_KEYDOWN) {
+        switch (event->key.keysym.scancode)
+        {
+        case SDL_SCANCODE_A:
+            dns_arr_append(ctx->arr);
+            break;
+        case SDL_SCANCODE_D: 
+            dns_arr_del_at_index(ctx->arr, 0);
+            break;
+        default:
+            break;
+        }
+    }
+}
+
 
 void handle_global_input(VisualizerContext *ctx, SDL_Event *event) {
             switch (event->type)
