@@ -60,7 +60,6 @@ void queue_print(dns_int_queue_t *queue) {
 }
 
 // POP
-// This is 0(n) because its not a linked list
 int queue_pop(dns_int_queue_t *queue) {
     if(queue->count == 0) {
         return 0;

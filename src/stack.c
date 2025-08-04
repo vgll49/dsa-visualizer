@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "stack.h"
 
-//do correect error handling here
 // CREATE
 dns_stack_t* stack_create(int capacity) {
     dns_stack_t* stack = malloc(sizeof(dns_stack_t));
@@ -26,18 +25,27 @@ dns_stack_t* stack_create(int capacity) {
     return stack;
 }
 
-// PRINT ALL (how to make this work with void lol)
+// PRINT
 void stack_print(dns_stack_t *stack) {
     for(int i = 0; i < stack->count; i++) {
         switch (stack->stack_elements[i].data_type) {
             case TYPE_INT:
-            printf("INT value %d at Index %d\n",(int)stack->stack_elements[i].data, i);
+            printf("INT value %d at Index %d\n",*(int*)stack->stack_elements[i].data, i);
             break;
-
+            case TYPE_FLOAT:
+            printf("Float value %.2f at Index %d\n",*(float*)stack->stack_elements[i].data, i);
+            break;
+            case TYPE_CHAR:
+            printf("Char value %c at Index %d\n",*(char*)stack->stack_elements[i].data, i);
+            break;
+            case TYPE_STRING:
+            printf("String value %s at Index %d\n",(char *)stack->stack_elements[i].data, i);
+            break;
             default:
             break;
         }
     }
+    printf("current stack size is: %d\n", stack->count);
 }
 
 // PUSH
@@ -91,18 +99,12 @@ void stack_push_multiple_types(dns_stack_t *stack) {
 
 
     char* ch = malloc(sizeof(char)); 
-    *ch = 'C';
+    *ch = 'A' + (random() % 26);
     t_stack_element char_elem = {
         .data = ch,
         .data_type = TYPE_CHAR,
     };
     stack_push(stack, &char_elem);
-
-
-    free(int_obj);
-    free(pi);
-    free(string_obj_adress);
-    free(ch);
 }   
 
 // POP
@@ -127,7 +129,3 @@ void stack_free(dns_stack_t *stack) {
     }
     free(stack);
 }
-
-
-//Peek
-
