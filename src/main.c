@@ -2,7 +2,6 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-
 #include <time.h>
 #include "array.h"
 #include "stack.h"
@@ -29,8 +28,13 @@ int main() {
     VisualizerContext ctx = {
         .current_state = STATE_HOME,
         .arr = create_dns_array(10),
+        .stack = stack_create(5),
+        .queue = queue_create(5),
+        .ll = linked_list_create(),
         .visualizer = DNSVisualizer,
     };
+    
+    stack_push_multiple_types(ctx.stack);
     
     // TODO: rm 
     TTF_Font *ourFont = TTF_OpenFont("./fonts/8bitOperatorPlus8-Regular.ttf", 12);
@@ -53,6 +57,15 @@ int main() {
             case STATE_ARRAY_VIEW:
                 handle_array_input(&ctx, &event);
                 break;
+            case STATE_STACK_VIEW:
+                handle_stack_input(&ctx, &event);
+                break;
+            case STATE_QUEUE_VIEW:
+                handle_queue_input(&ctx, &event);
+                break;
+            case STATE_LL_VIEW:
+                handle_ll_input(&ctx, &event);
+                break;
             default:
                 break;
         }
@@ -65,6 +78,15 @@ int main() {
             break;
         case STATE_ARRAY_VIEW:
             draw_array_screen(ctx);
+            break;
+        case STATE_STACK_VIEW:
+           draw_stack_screen(ctx);
+           break;
+        case STATE_QUEUE_VIEW:
+            draw_queue_screen(ctx); 
+            break;
+        case STATE_LL_VIEW:
+            draw_ll_screen(ctx);
             break;
         default:
             break;
