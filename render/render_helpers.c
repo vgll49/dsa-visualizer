@@ -6,6 +6,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "render_helpers.h"
 
+
 #define WINDOW_TITLE "01 Open Window"
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -319,6 +320,9 @@ void handle_array_input(VisualizerContext *ctx, SDL_Event *event) {
             break;
         case SDL_SCANCODE_D: 
             dns_arr_del_at_index(ctx->arr, 0);
+            break;
+        case SDL_SCANCODE_B: 
+            bubble_sort(ctx->arr);
             break;
         default:
             break;

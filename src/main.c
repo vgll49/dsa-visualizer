@@ -7,9 +7,28 @@
 #include "stack.h"
 #include "queue.h"
 #include "linked_list.h"
+#include "sorting_algorithms.h"
 #include "../render/render_helpers.h"
 
 int main() {
+    dns_arr_t* sort = create_dns_array(0);
+    for(int i = 0; i < 10; i++) {
+        dns_arr_append(sort);
+        SDL_Delay(1000);
+    }
+
+    for(int i = 0; i < sort->size; i++) {
+        printf("value at index %d is: %d\n", i, sort->data[i]);
+    }
+
+    printf("bubble sort call\n");
+
+    sort = bubble_sort(sort);
+
+    for(int i = 0; i < sort->size; i++) {
+        printf("Sorted value at index %d is: %d\n", i, sort->data[i]);
+    }
+    
 
     t_visualizer DNSVisualizer = {
         .window = NULL,

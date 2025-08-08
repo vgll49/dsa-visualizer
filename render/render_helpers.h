@@ -4,6 +4,7 @@
 #include "../src/queue.h"
 #include "../src/stack.h"
 #include "../src/linked_list.h"
+#include "../src/sorting_algorithms.h"
 
 
 typedef struct Visualizer {
