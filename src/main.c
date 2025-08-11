@@ -21,10 +21,11 @@ int main() {
         printf("value at index %d is: %d\n", i, sort->data[i]);
     }
 
-    printf("bubble sort call\n");
+    printf("quick sort call\n");
 
-    sort = bubble_sort(sort);
-
+//    sort = insertion_sort(sort);
+    quick_sort(sort, 0, 9);
+    
     for(int i = 0; i < sort->size; i++) {
         printf("Sorted value at index %d is: %d\n", i, sort->data[i]);
     }

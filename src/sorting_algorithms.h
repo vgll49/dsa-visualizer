@@ -4,5 +4,6 @@
 
 dns_arr_t* bubble_sort(dns_arr_t* array);
 dns_arr_t* merge_sort(dns_arr_t* array);
-
+dns_arr_t* insertion_sort(dns_arr_t* array);
+void* quick_sort(dns_arr_t* array, int low, int high);
 #endif
